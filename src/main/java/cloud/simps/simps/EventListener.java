@@ -19,7 +19,9 @@ public class EventListener implements Listener {
         // A ban is really just a kick and adding the player to the ban list
         if (!player.isBanned()) return;
 
-        plugin.getServer().broadcast(String.format("%s was banned, distributing to SIMPS", player.getName()), "simps.notify");
+        var logMsg = String.format("%s was banned, distributing to SIMPS", player.getName());
+        plugin.getServer().broadcast(logMsg, "simps.notify");
+        plugin.getLogger().info(logMsg);
         // TODO: actually send stuff to the SIMPS API
     }
 }
