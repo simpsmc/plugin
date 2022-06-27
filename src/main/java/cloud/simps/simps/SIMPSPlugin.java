@@ -3,7 +3,6 @@ package cloud.simps.simps;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -35,8 +34,6 @@ public final class SIMPSPlugin extends JavaPlugin {
         // If the API is available we register for events
         getServer().getPluginManager().registerEvents(new EventListener(this), this);
     }
-
-
 
     public OkHttpClient getHttpClient() {
         return httpClient;

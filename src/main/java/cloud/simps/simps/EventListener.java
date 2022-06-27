@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerKickEvent;
 
 public class EventListener implements Listener {
-    private SIMPSPlugin plugin;
+    private final SIMPSPlugin plugin;
 
     public EventListener(SIMPSPlugin plugin) {
         this.plugin = plugin;
