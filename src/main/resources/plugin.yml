@@ -6,3 +6,7 @@ prefix: SIMPS
 load: STARTUP
 author: Nomad
 description: The SIMPS Plugin
+permissions:
+  simps.notify:
+    default: false
+    description: Players with this permission will be notified of SIMPS events
