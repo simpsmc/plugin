@@ -1,0 +1,8 @@
+name: SIMPS
+version: '${project.version}'
+main: cloud.simps.simps.SIMPSPlugin
+api-version: 1.19
+prefix: SIMPS
+load: STARTUP
+author: Nomad
+description: The SIMPS Plugin
