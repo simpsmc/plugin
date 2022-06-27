@@ -29,6 +29,7 @@ public final class SIMPSPlugin extends JavaPlugin {
         } catch (Exception e) {
             this.getLogger().severe("Could not connect to SIMPS API, disabling SIMPS");
             this.setEnabled(false);
+            return;
         }
 
         // If the API is available we register for events
