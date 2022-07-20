@@ -1,23 +1,30 @@
-package cloud.simps.simps;
+package cloud.simps.simps.listeners;
 
+import cloud.simps.simps.SIMPSPlugin;
+import com.earth2me.essentials.User;
+import com.earth2me.essentials.craftbukkit.BanLookup;
+import net.ess3.api.IEssentials;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.plugin.Plugin;
 
-public class EventListener implements Listener {
+public class EssentialsListener implements Listener {
     private final SIMPSPlugin plugin;
+    private final IEssentials essentials;
 
-    public EventListener(SIMPSPlugin plugin) {
+    public EssentialsListener(SIMPSPlugin plugin, Plugin essentials) {
         this.plugin = plugin;
+        this.essentials = (IEssentials) essentials;
     }
 
     @EventHandler
     public void onPlayerKick(PlayerKickEvent event) {
         Player player = event.getPlayer();
+        User essentialsUser = this.essentials.getUser(player);
 
-        // A ban is really just a kick and adding the player to the ban list
-        if (!player.isBanned()) return;
+        if (!BanLookup.isBanned(essentials, essentialsUser)) return;
 
         var logMsg = String.format("%s was banned, distributing to SIMPS", player.getName());
         plugin.getServer().broadcast(logMsg, "simps.notify");

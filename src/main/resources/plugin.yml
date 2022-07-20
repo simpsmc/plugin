@@ -6,6 +6,9 @@ prefix: SIMPS
 load: STARTUP
 author: Nomad
 description: The SIMPS Plugin
+softdepend:
+  - Essentials
+  - LiteBans
 permissions:
   simps.notify:
     default: false
