@@ -19,7 +19,8 @@ public final class SIMPSPlugin extends JavaPlugin {
         // Make sure all requests use api key if directed to our API
         httpClient = new OkHttpClient.Builder().addInterceptor(chain -> {
             Request ogReq = chain.request();
-            if (!ogReq.url().host().equals("api.simps.cloud")) return chain.proceed(ogReq);
+            String url = this.getConfig().getString("apiUrl");
+            if (!ogReq.url().host().equals(url)) return chain.proceed(ogReq);
             Request req = ogReq.newBuilder().addHeader("Authorization", "API_KEY").build();
             return chain.proceed(req);
         }).build();
@@ -58,6 +59,8 @@ public final class SIMPSPlugin extends JavaPlugin {
             // If neither essentials nor litebans is found, we default to listening for vanilla bans
             getServer().getPluginManager().registerEvents(new VanillaListener(this), this);
         }
+
+        this.saveDefaultConfig();
     }
 
     public OkHttpClient getHttpClient() {
