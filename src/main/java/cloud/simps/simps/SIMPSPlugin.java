@@ -3,7 +3,6 @@ package cloud.simps.simps;
 import cloud.simps.simps.listeners.EssentialsListener;
 import cloud.simps.simps.listeners.LiteBansListener;
 import cloud.simps.simps.listeners.VanillaListener;
-import litebans.api.Events;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -47,7 +46,7 @@ public final class SIMPSPlugin extends JavaPlugin {
             if (banHandler.equals(essentials)) {
                 getServer().getPluginManager().registerEvents(new EssentialsListener(this, essentials), this);
             } else if (banHandler.equals(litebans)) {
-                Events.get().register(new LiteBansListener(this));
+                LiteBansListener.register(this);
             } else {
                 // Litebans or essentials is found, but neither handle the ban command?
                 // Something funky is going on, disable the plugin

@@ -19,4 +19,8 @@ public class LiteBansListener extends Events.Listener {
         plugin.getLogger().info(logMsg);
         // TODO: actually send stuff to the SIMPS API
     }
+
+    public static void register(SIMPSPlugin plugin) {
+        Events.get().register(new LiteBansListener(plugin));
+    }
 }
