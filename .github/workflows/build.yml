@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           java-version: '17'
-          ditributions: 'adopt'
+          distribution: 'adopt'
       - name: Build JAR
         run: mvn --batch-mode --update-snapshots package
       - name: Upload artifact
