@@ -12,6 +12,8 @@ public final class SIMPSPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        this.saveDefaultConfig();
+
         // Make sure all requests use api key if directed to our API
         httpClient = new OkHttpClient.Builder().addInterceptor(chain -> {
             Request ogReq = chain.request();
@@ -21,21 +23,23 @@ public final class SIMPSPlugin extends JavaPlugin {
             return chain.proceed(req);
         }).build();
 
-        // Test to make sure the API is available
-        // Otherwise disable the plugin
-        Request testRequest = new Request.Builder().url("https://api.simps.cloud/ping").build();
+        if (this.getConfig().getBoolean("checkApiAvailability")) {
+            // Test to make sure the API is available
+            // Otherwise disable the plugin
+            Request testRequest = new Request.Builder().url("https://api.simps.cloud/ping").build();
 
-        try (Response res = httpClient.newCall(testRequest).execute()){
-            if (!res.isSuccessful()) throw new IOException("Unexpected non 200 code");
-        } catch (Exception e) {
-            this.getLogger().severe("Could not connect to SIMPS API, disabling SIMPS");
-            this.setEnabled(false);
-            return;
+            try (Response res = httpClient.newCall(testRequest).execute()) {
+                if (!res.isSuccessful()) throw new IOException("Unexpected non 200 code");
+            } catch (Exception e) {
+                this.getLogger().severe("Could not connect to SIMPS API, disabling SIMPS");
+                this.setEnabled(false);
+                return;
+            }
+        } else {
+            getLogger().severe("API availability check has been disabled, unless you know what this entails, you should set 'checkApiAvailability' to true in the config");
         }
 
         getServer().getPluginManager().registerEvents(new BanCommandListener(this), this);
-
-        this.saveDefaultConfig();
     }
 
     public OkHttpClient getHttpClient() {

@@ -1,1 +1,5 @@
 apiUrl: https://example.com
+
+# DEVELOPMENT USE ONLY, this should always be true during production use
+# Unless you understand what this does, you most likely want it on
+checkApiAvailability: true
