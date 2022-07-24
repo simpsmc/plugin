@@ -23,6 +23,14 @@ public class BanCommandListener implements Listener {
     }
 
     private void parseCommandContent(String command) {
-        this.plugin.getLogger().info(command);
+        String[] args = command.split(" ");
+
+        if (args[0].equals("ban")) {
+            String bannedUser = args[1];
+            String banReason = null;
+            if (args.length < 2) banReason = args[2];
+
+            // TODO: Send parsed info to main logic
+        }
     }
 }
